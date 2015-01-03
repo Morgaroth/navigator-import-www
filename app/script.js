@@ -4,7 +4,7 @@ var app = angular.module('single-page-app', ['ngRoute']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'home.html'
+            templateUrl: 'app/home.html'
         });
     //.when('/about', {
     //    templateUrl: 'about.html'
