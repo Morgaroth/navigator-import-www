@@ -1,0 +1,15 @@
+<div style="padding-left:130px;padding-right:200px;">
+    <h1>Hello!</h1>
+
+    <p>This is simple app for pushing routes from gpx to your MapFactor:Navigator app.</p>
+
+    <p>
+        Please provide your GPX body<br/>
+
+    <form ng-submit="submit()" ng-controller="PushingGPXCtr">
+        <input type="submit" id="submit" value="Submit" class="btn btn-primary btn-lg"/>
+        <br/>
+        <br/>
+        <textarea class="form-control" type="text" ng-model="text" name="text" title="Gpx body" style="min-height: 100%;"></textarea>
+    </form>
+</div>
