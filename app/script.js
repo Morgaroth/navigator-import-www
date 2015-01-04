@@ -6,6 +6,7 @@ app.service('URL', function () {
      */
     this.ApiURL = function () {
         return "https://navigator-import-api.herokuapp.com";
+        //return "http://localhost:8000";
     }
 });
 
@@ -19,19 +20,33 @@ app.config(function ($routeProvider) {
     //});
 });
 
-app.controller('PushingGPXCtr', ['URL', '$scope', '$http', function (URLProvider, $scope, $http) {
+app.controller('PushingGPXCtr', ['URL', '$scope', '$http', '$timeout', function (URLProvider, $scope, $http, $timeout) {
+    $scope.isImage = function () {
+        //console.log("isimage " + $scope.someImage);
+        return $scope.someImage !== undefined;
+    };
+    $scope.someImage = undefined;
     $scope.text = '';
     $scope.submit = function () {
         if ($scope.text) {
             var url = URLProvider.ApiURL() + '/api/gpx';
             console.log(url);
-            $http.post(url, {msg: $scope.text}).
+            $http.post(url, $scope.text).
                 success(function (data, status, headers, config) {
                     console.log("success data: " + data);
                     console.log("success status: " + status);
                     console.log("success headers: " + headers);
                     console.log("success config: " + config);
-                    alert("success of pushing code")
+                    $timeout(function () {
+                        //console.log("timeout");
+                        $scope.$apply(function () {
+                            $scope.$parent.someImage = data;
+                            //console.log("setted image " + $scope.$parent.someImage);
+                        });
+                    }, 50);
+                    //alert("success of pushing code")
+                    //$scope.someImage = data;
+
                 }).
                 error(function (data, status, headers, config) {
                     console.log("failure: data: " + data);
