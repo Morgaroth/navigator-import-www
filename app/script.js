@@ -40,7 +40,7 @@ app.controller('PushingGPXCtr', ['URL', '$scope', '$http', '$timeout', function 
                     $timeout(function () {
                         //console.log("timeout");
                         $scope.$apply(function () {
-                            $scope.$parent.someImage = data;
+                            $scope.$parent.someImage = data.image;
                             //console.log("setted image " + $scope.$parent.someImage);
                         });
                     }, 50);
@@ -53,7 +53,7 @@ app.controller('PushingGPXCtr', ['URL', '$scope', '$http', '$timeout', function 
                     console.log("failure: status: " + status);
                     console.log("failure: headers: " + headers);
                     console.log("failure: config: " + config);
-                    alert("failure of pushing code")
+                    alert("error during pushing:\n" + data.error)
                 });
             $scope.text = '';
         }
