@@ -5,8 +5,8 @@ app.service('URL', function () {
      * @return {string}
      */
     this.ApiURL = function () {
-        //return "https://navigator-import-api.herokuapp.com";
-        return "http://localhost:8000";
+        return "https://navigator-import-api.herokuapp.com";
+        //return "http://localhost:8000";
     }
 });
 
