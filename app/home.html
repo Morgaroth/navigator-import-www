@@ -7,13 +7,28 @@
     <div ng-if="isImage()">
         <img ng-src="{{someImage}}"/>
     </div>
-    <p> Please provide your GPX body<br/>
 
-    <form ng-submit="submit()" ng-controller="PushingGPXCtr">
-        <input type="submit" id="submit" value="Submit" class="btn btn-primary btn-lg"/>
-        <br/>
-        <br/>
+    <div>
+        <p> Please provide your google maps link<br/>
+
+        <form ng-submit="submitGoogle()" ng-controller="PushingGPXCtr">
+            <input type="submit" id="submitGoogle" value="Submit" class="btn btn-primary btn-lg"/>
+            <br/>
+            <br/>
+        <textarea class="form-control" type="text" ng-model="text" name="text" title="Google Maps link"
+                  style="min-height: 100%;"></textarea>
+        </form>
+    </div>
+    <div>
+        <p> Please provide your GPX body<br/>
+
+        <form ng-submit="submitGpx()" ng-controller="PushingGPXCtr">
+            <input type="submit" id="submitGpx" value="Submit" class="btn btn-primary btn-lg"/>
+            <br/>
+            <br/>
         <textarea class="form-control" type="text" ng-model="text" name="text" title="Gpx body"
                   style="min-height: 100%;"></textarea>
-    </form>
+        </form>
+    </div>
+
 </div>

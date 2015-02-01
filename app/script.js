@@ -5,8 +5,8 @@ app.service('URL', function () {
      * @return {string}
      */
     this.ApiURL = function () {
-        return "https://navigator-import-api.herokuapp.com";
-        //return "http://localhost:8000";
+        //return "https://navigator-import-api.herokuapp.com";
+        return "http://localhost:8000";
     }
 });
 
@@ -27,16 +27,16 @@ app.controller('PushingGPXCtr', ['URL', '$scope', '$http', '$timeout', function 
     };
     $scope.someImage = undefined;
     $scope.text = '';
-    $scope.submit = function () {
+    $scope.submitGpx = function () {
         if ($scope.text) {
             var url = URLProvider.ApiURL() + '/api/gpx';
             console.log(url);
             $http.post(url, $scope.text).
                 success(function (data, status, headers, config) {
-                    console.log("success data: " + data);
-                    console.log("success status: " + status);
-                    console.log("success headers: " + headers);
-                    console.log("success config: " + config);
+                    console.log("gpx success data: " + data);
+                    console.log("gpx success status: " + status);
+                    console.log("gpx success headers: " + headers);
+                    console.log("gpx success config: " + config);
                     $timeout(function () {
                         //console.log("timeout");
                         $scope.$apply(function () {
@@ -49,11 +49,42 @@ app.controller('PushingGPXCtr', ['URL', '$scope', '$http', '$timeout', function 
 
                 }).
                 error(function (data, status, headers, config) {
-                    console.log("failure: data: " + data);
-                    console.log("failure: status: " + status);
-                    console.log("failure: headers: " + headers);
-                    console.log("failure: config: " + config);
-                    alert("error during pushing:\n" + data.error)
+                    console.log("gpx failure: data: " + data);
+                    console.log("gpx failure: status: " + status);
+                    console.log("gpx failure: headers: " + headers);
+                    console.log("gpx failure: config: " + config);
+                    alert("gpx error during pushing:\n" + data.error)
+                });
+            $scope.text = '';
+        }
+    };
+    $scope.submitGoogle = function () {
+        if ($scope.text) {
+            var url = URLProvider.ApiURL() + '/api/google';
+            console.log(url);
+            $http.post(url, $scope.text).
+                success(function (data, status, headers, config) {
+                    console.log("google success data: " + data);
+                    console.log("google success status: " + status);
+                    console.log("google success headers: " + headers);
+                    console.log("google success config: " + config);
+                    $timeout(function () {
+                        //console.log("timeout");
+                        $scope.$apply(function () {
+                            $scope.$parent.someImage = data.image;
+                            //console.log("setted image " + $scope.$parent.someImage);
+                        });
+                    }, 50);
+                    //alert("success of pushing code")
+                    //$scope.someImage = data;
+
+                }).
+                error(function (data, status, headers, config) {
+                    console.log("google failure: data: " + data);
+                    console.log("google failure: status: " + status);
+                    console.log("google failure: headers: " + headers);
+                    console.log("google failure: config: " + config);
+                    alert("google error during pushing:\n" + data.error)
                 });
             $scope.text = '';
         }
